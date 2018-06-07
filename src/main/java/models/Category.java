@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Category {
    private String name;
+   private int taskCount;
    private int id;
 
     public Category(String name) { this.name = name; }
@@ -29,4 +30,8 @@ public class Category {
     public int hashCode() {
         return Objects.hash(name, id);
     }
+
+    public int getTaskCount() { return taskCount; }
+
+    public void setTaskCount(int taskCount) { this.taskCount = taskCount; }
 }
