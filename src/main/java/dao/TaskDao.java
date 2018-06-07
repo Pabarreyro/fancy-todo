@@ -4,7 +4,7 @@ import models.Task;
 
 import java.util.List;
 
-public class TaskDao {
+public interface TaskDao {
     // CREATE
     void add(Task task);
 
