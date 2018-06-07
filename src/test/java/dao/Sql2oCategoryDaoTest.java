@@ -74,7 +74,7 @@ public class Sql2oCategoryDaoTest {
         int assignedId = testCategory.getId();
         categoryDao.update(assignedId, "Gardening");
         Category updatedCategory = categoryDao.findById(assignedId);
-        assertEquals(originalName, updatedCategory.getName());
+        assertNotEquals(originalName, updatedCategory.getName());
     }
 
     @Test
