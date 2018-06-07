@@ -25,39 +25,58 @@ public class App {
         Connection conn = sql2o.open();
 
         // get: display all categories and tasks therein
-        // /
+        get("/", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
 
         // get: display new category form (display all categories)
-        // /categories/new
+        get("/categories/new", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "category-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         // post: submit category form (redirect to /)
         // /categories
 
+
         // get: display single category by id, with all related tasks (display all categories)
-        // /categories/:id
+        get("/categories/:id", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "category-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         // get: display update form for single category by id (display all categories)
-        // /categories/:id/update
+        get("/categories/:id/update", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "category-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         // post: submit category update form (redirect to /categories/:id)
         // /categories
 
         // get: display new task form for single category by id (display all categories)
-        // /categories/:id/task/new
+        // /categories/:id/tasks/new
 
         // post: submit new task to single category (redirect to /categories/:id)
         // /categories/:id/task
 
         // get: display new task form (display all categories)
-        // /tasks/new
+        get("/tasks/new", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "task-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         // post: submit new task form (redirect to /)
         // /tasks
 
         // get: display task update form (display all categories)
-        // /tasks/:id/update
+        get("/tasks/:id/update", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "task-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
-        // post: submit task update form (redirect to /categories/:id/tasks)
+        // post: submit task update form (redirect to /categories/:id)
         // /tasks
 
         // post: delete category by id & all related tasks (redirect to /)
