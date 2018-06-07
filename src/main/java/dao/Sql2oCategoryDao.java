@@ -15,7 +15,7 @@ public class Sql2oCategoryDao implements CategoryDao {
 
     @Override
     public void add(Category category) {
-        String sql = "INSERT into categories (name) VALUES (:name)";
+        String sql = "INSERT into categories (name, taskCount) VALUES (:name, :taskCount)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true).bind(category).executeUpdate().getKey();
             category.setId(id);
@@ -53,12 +53,13 @@ public class Sql2oCategoryDao implements CategoryDao {
     }
 
     @Override
-    public void update(int id, String name) {
-        String sql = "UPDATE categories SET name = :name where id = :id";
+    public void update(int id, String name, int taskCount) {
+        String sql = "UPDATE categories SET (name, taskCount) = (:name, :taskCount) where id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("name", name)
+                    .addParameter("taskCount", taskCount)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);
