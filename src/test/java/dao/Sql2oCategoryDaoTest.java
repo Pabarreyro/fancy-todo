@@ -48,6 +48,17 @@ public class Sql2oCategoryDaoTest {
         assertEquals(testCategory, categoryDao.findById(assignedId));
     }
 
+    @Test
+    public void update_setsNewValuesCorrectly() {
+        Category testCategory = setupCategory();
+        String originalName = testCategory.getName();
+        categoryDao.add(testCategory);
+        int assignedId = testCategory.getId();
+        categoryDao.update(assignedId, "Gardening");
+        Category updatedCategory = categoryDao.findById(assignedId);
+        assertEquals(originalName, updatedCategory.getName());
+    }
+
     public Category setupCategory() {
         return new Category("Yardwork");
     }
