@@ -32,6 +32,15 @@ public class Sql2oTaskDaoTest {
         assertNotEquals(initialTaskId, testTask.getId());
     }
 
+    @Test
+    public void getAll_returnsAllExistingTasks_2() {
+        Task testTask= setupTask();
+        Task testTask2= new Task("wash linens", 2);
+        taskDao.add(testTask);
+        taskDao.add(testTask2);
+        assertEquals(2, taskDao.getAll().size());
+    }
+
     public Task setupTask(){
         return new Task("mow the lawn", 1);
     }
