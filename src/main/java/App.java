@@ -77,14 +77,22 @@ public class App {
         // post: submit new task to single category (redirect to /categories/:id)
         // /categories/:id/task
 
-        // get: display new task form (display all categories)
+        // get: display new task form
         get("/tasks/new", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            List<Category> categories = categoryDao.getAll();
+            model.put("categories", categories);
             return new ModelAndView(model, "task-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         // post: submit new task form (redirect to /)
         post("/tasks", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            String inputDescription = req.queryParams("description");
+            int categoryId = Integer.parseInt(req.queryParams("categoryId"));
+            Task newTask = new Task(inputDescription, categoryId);
+            taskDao.add(newTask);
+            categoryDao.update(categoryId, categoryDao.findById(categoryId).getName(), categoryDao.getAllTasksById(categoryId).size());
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
