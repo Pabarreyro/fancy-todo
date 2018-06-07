@@ -81,6 +81,20 @@ public class Sql2oTaskDaoTest {
     }
 
     @Test
+    public void deleteByCategoryId_removesAllTasksCorrectly() {
+        Task testTask= setupTask();
+        Task testTask2= new Task("wash linens", 2);
+        Task testTask3= new Task("wash towels", 2);
+        taskDao.add(testTask);
+        taskDao.add(testTask2);
+        taskDao.add(testTask3);
+        taskDao.deleteByCategoryId(2);
+        assertTrue(taskDao.getAll().contains(testTask));
+        assertFalse(taskDao.getAll().contains(testTask2));
+        assertFalse(taskDao.getAll().contains(testTask3));
+    }
+
+    @Test
     public void clearAll_removesAllExistingTasks_0() {
         Task testTask= setupTask();
         Task testTask2= new Task("wash linens", 2);
