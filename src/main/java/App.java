@@ -37,7 +37,10 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         // post: submit category form (redirect to /)
-        // /categories
+        post("/categories", (req, res) -> {
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
         // get: display single category by id, with all related tasks (display all categories)
@@ -53,7 +56,10 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         // post: submit category update form (redirect to /categories/:id)
-        // /categories
+        post("/categories/:id/update", (req, res) -> {
+            res.redirect("/categories/:id");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         // get: display new task form for single category by id (display all categories)
         // /categories/:id/tasks/new
@@ -68,7 +74,10 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         // post: submit new task form (redirect to /)
-        // /tasks
+        post("/tasks", (req, res) -> {
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         // get: display task update form (display all categories)
         get("/tasks/:id/update", (req, res) -> {
@@ -77,19 +86,35 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         // post: submit task update form (redirect to /categories/:id)
-        // /tasks
+        post("/tasks/:id/update", (req, res) -> {
+            res.redirect("/categories/:id");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         // post: delete category by id & all related tasks (redirect to /)
         // /categories/:id/delete
+        post("/categories/:id/delete", (req, res) -> {
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         // post: delete all categories & tasks (redirect to /)
-        // /categories/delete
+        post("/categories/delete", (req, res) -> {
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         // post: delete task by id (redirect to /categories/:id)
-        // /tasks/:id/delete
+        post("/tasks/:id/delete", (req, res) -> {
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         // post: delete all tasks (redirect to /)
-        // /tasks/delete
+        post("/tasks/delete", (req, res) -> {
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
     }
