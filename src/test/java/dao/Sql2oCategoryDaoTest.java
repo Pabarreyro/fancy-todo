@@ -55,7 +55,7 @@ public class Sql2oCategoryDaoTest {
         int assisgnedId = testCategory.getId();
         taskDao.add(new Task("mow the lawn", assisgnedId));
         taskDao.add(new Task("trim the hedges", assisgnedId));
-        assertEquals(2, categoryDao.getAllTasksById(assisgnedId));
+        assertEquals(2, categoryDao.getAllTasksById(assisgnedId).size());
     }
 
     @Test
