@@ -45,18 +45,40 @@ public class Sql2oTaskDao implements TaskDao {
     }
 
     @Override
-    public void update(int id, String name, int categoryId) {
-
+    public void update(int id, String description, int categoryId) {
+        String sql = "UPDATE tasks SET (description, categoryId) = (:description, :categoryId) WHERE id =:id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .addParameter("categoryId", categoryId)
+                    .addParameter("description", description)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
     public void deleteById(int id) {
-
+        String sql = "DELETE from tasks WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
     public void clearAll() {
-
+        String sql = "DELETE from tasks";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
 
