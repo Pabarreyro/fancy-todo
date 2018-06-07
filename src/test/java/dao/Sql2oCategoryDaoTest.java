@@ -31,6 +31,15 @@ public class Sql2oCategoryDaoTest {
         assertNotEquals(initialId, testCategory.getId());
     }
 
+    @Test
+    public void getAll_returnsAllExistingCategories_2() {
+        Category testCategory = setupCategory();
+        Category testCategory2 = new Category("Laundry");
+        categoryDao.add(testCategory);
+        categoryDao.add(testCategory2);
+        assertEquals(2, categoryDao.getAll().size());
+    }
+
     public Category setupCategory() {
         return new Category("Yardwork");
     }
