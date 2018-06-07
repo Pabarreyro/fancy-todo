@@ -7,7 +7,7 @@ public class Category {
    private int taskCount;
    private int id;
 
-    public Category(String name) { this.name = name; }
+    public Category(String name) { this.name = name; this.taskCount = 0; }
 
     public String getName() { return name; }
 
