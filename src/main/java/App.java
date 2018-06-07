@@ -56,6 +56,9 @@ public class App {
         // get: display single category by id, with all related tasks (display all categories)
         get("/categories/:id", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            int categoryId = Integer.parseInt(req.params("id"));
+            model.put("category", categoryDao.findById(categoryId));
+            model.put("tasks", categoryDao.getAllTasksById(categoryId));
             return new ModelAndView(model, "category-details.hbs");
         }, new HandlebarsTemplateEngine());
 
