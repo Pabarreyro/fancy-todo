@@ -80,6 +80,16 @@ public class Sql2oTaskDaoTest {
         assertFalse(taskDao.getAll().contains(testTask));
     }
 
+    @Test
+    public void clearAll_removesAllExistingTasks_0() {
+        Task testTask= setupTask();
+        Task testTask2= new Task("wash linens", 2);
+        taskDao.add(testTask);
+        taskDao.add(testTask2);
+        taskDao.clearAll();
+        assertEquals(0, taskDao.getAll().size());
+    }
+
     public Task setupTask(){
         return new Task("mow the lawn", 1);
     }
