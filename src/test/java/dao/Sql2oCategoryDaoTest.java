@@ -40,6 +40,14 @@ public class Sql2oCategoryDaoTest {
         assertEquals(2, categoryDao.getAll().size());
     }
 
+    @Test
+    public void findById_returnsCorrectCategory() {
+        Category testCategory = setupCategory();
+        categoryDao.add(testCategory);
+        int assignedId = testCategory.getId();
+        assertEquals(testCategory, categoryDao.findById(assignedId));
+    }
+
     public Category setupCategory() {
         return new Category("Yardwork");
     }
