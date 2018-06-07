@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{#block "title"}}Blog{{/block}}</title>
-
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <title>{{#block "title"}}TaskMaster{{/block}}</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
 </head>
 <body>
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="/">Home</a></li>
-    <li role="presentation"><a href="/tasks/new">Add a New Task</a></li>
-</ul>
+<nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <a class="navbar-brand" href="/">TaskMaster</a>
+</nav>
 <div class="container">
     <!--begin main template-->
-    <div class="page-header">
-        <img src="/images/rawpixel-com-296621.jpg" width="70%" alt="https://unsplash.com/search/task?photo=Lh_bn9SgRSY">
-        <h1>Welcome to my To Do List. <small>Let's be organized, focused, and efficient.</small></h1>
-    </div>
 
     <div class="col-md-12">
         {{#block "content"}}
@@ -27,7 +21,10 @@
 {{#block "footer"}}
     <footer class="footer">
         <div class="container">
-            <p class="text-muted"><a href="/tasks/delete">DELETE ALL TASKS</a></p>
+            <hr>
+            <p class="text-muted">
+                TaskMaster
+            </p>
         </div>
     </footer>
     </body>
