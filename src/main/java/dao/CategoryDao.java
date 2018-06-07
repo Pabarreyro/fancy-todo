@@ -18,7 +18,7 @@ public interface CategoryDao {
     List<Task> getAllTasksById(int categoryId);
 
     // UPDATE
-    void update(int id, String name);
+    void update(int id, String name, int taskCount);
 
     // DELETE
     void deleteById(int id);
