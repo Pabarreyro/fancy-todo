@@ -52,10 +52,10 @@ public class Sql2oCategoryDaoTest {
     public void getAllTasksById_returnsAllExistingTasks_2() {
         Category testCategory = setupCategory();
         categoryDao.add(testCategory);
-        int assisgnedId = testCategory.getId();
-        taskDao.add(new Task("mow the lawn", assisgnedId));
-        taskDao.add(new Task("trim the hedges", assisgnedId));
-        assertEquals(2, categoryDao.getAllTasksById(assisgnedId).size());
+        int assignedId = testCategory.getId();
+        taskDao.add(new Task("mow the lawn", assignedId));
+        taskDao.add(new Task("trim the hedges", assignedId));
+        assertEquals(2, categoryDao.getAllTasksById(assignedId).size());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class Sql2oCategoryDaoTest {
         String originalName = testCategory.getName();
         categoryDao.add(testCategory);
         int assignedId = testCategory.getId();
-        categoryDao.update(assignedId, "Gardening");
+        categoryDao.update(assignedId, "Gardening", 1);
         Category updatedCategory = categoryDao.findById(assignedId);
         assertNotEquals(originalName, updatedCategory.getName());
     }
