@@ -40,7 +40,7 @@ public class Task {
         this.description = content;
     }
 
-    public boolean setCompleted() { return this.completed; }
+    public boolean isCompleted() { return this.completed; }
 
     public void setCompleted(boolean completed) { this.completed = completed; }
 
