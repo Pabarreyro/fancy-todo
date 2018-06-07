@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dao.CategoryDao;
 import dao.Sql2oCategoryDao;
 import dao.Sql2oTaskDao;
 import dao.TaskDao;
+import models.Category;
 import models.Task;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -27,6 +29,10 @@ public class App {
         // get: display all categories and tasks therein
         get("/", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            List<Category> categories = categoryDao.getAll();
+            List<Task> tasks = taskDao.getAll();
+            model.put("categories", categories);
+            model.put("tasks", tasks);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -115,7 +121,5 @@ public class App {
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
-
-
     }
 }
