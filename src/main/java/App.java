@@ -44,6 +44,10 @@ public class App {
 
         // post: submit category form (redirect to /)
         post("/categories", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            String inputName = req.queryParams("name");
+            Category newCategory = new Category(inputName);
+            categoryDao.add(newCategory);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
