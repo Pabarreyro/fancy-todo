@@ -1,14 +1,56 @@
 {{#partial "content"}}
 
-    <h1> List o' stuff to do!</h1>
+    <section class="jumbotron text-center my-2">
+        <div class="container">
+            <h1>Welcome to TaskMaster</h1>
+            <p>Your task organizer of choice!</p>
+            {{#if categories}}
+                <a href="/categories/new" class="btn btn-dark">Add Category</a>
+                <a href="/tasks/new" class="btn btn-warning">Add Task</a>
+            {{else}}
+                <a href="/categories/new" class="btn btn-dark">Add Category</a>
+            {{/if}}
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center">
+                Categories <span class="badge badge-pill badge-info">tasks</span>
+            </h2>
+            <div class="row">
+                {{#if categories}}
+                    {{#each categories}}
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <div class="card-body">
+                                    <h4 class="card-text text-center">
+                                        <a href="/categories/{{id}}">{{name}}</a> <span class="badge badge-pill badge-info">{{taskCount}}</span>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
 
     {{#if tasks}}
-        {{#each tasks }}
-         <p>Current task:</p>
-         <p>{{ description }} <a href="/tasks/{{id}}">read more...</a></p>
-        {{/each}}
+        <ul class="list-group">
+            {{#each tasks }}
+                <li class="list-group-item">
+                    <a href="/tasks/{{id}}">{{ description }}</a>
+                    {{#if completed}}
+                        <span class="badge badge-pill badge-danger">Done</span>
+                    {{else}}
+                        <span class="badge badge-pill badge-success">Pending</span>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
     {{else}}
-     <p>No tasks!</p>
+     <h3>No tasks yet!</h3>
     {{/if}}
 {{/partial}}
 
