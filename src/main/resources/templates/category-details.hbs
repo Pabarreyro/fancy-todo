@@ -1,0 +1,25 @@
+{{#partial "content"}}
+    <h2 class="text-center my-2">
+        {{category.name}} <span class="badge badge-pill badge-info">{{category.taskCount}}</span>
+    </h2>
+    <h4>Tasks</h4>
+    {{#if tasks}}
+        <ul class="list-group">
+            {{#each tasks }}
+                <li class="list-group-item">
+                    <a href="/tasks/{{id}}">{{ description }}</a>
+                    {{#if completed}}
+                        <span class="badge badge-pill badge-danger">Done</span>
+                    {{else}}
+                        <span class="badge badge-pill badge-success">Pending</span>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <h3>No tasks yet!</h3>
+    {{/if}}
+
+{{/partial}}
+
+{{> layout.hbs}}
