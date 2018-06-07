@@ -1,6 +1,7 @@
 package dao;
 
 import models.Category;
+import models.Task;
 import org.junit.*;
 import org.sql2o.*;
 
@@ -8,6 +9,7 @@ import static org.junit.Assert.*;
 
 public class Sql2oCategoryDaoTest {
     private Sql2oCategoryDao categoryDao;
+    private Sql2oTaskDao taskDao;
     private Connection conn;
 
     @Before
@@ -15,6 +17,7 @@ public class Sql2oCategoryDaoTest {
         String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "", "");
         categoryDao = new Sql2oCategoryDao(sql2o);
+        taskDao = new Sql2oTaskDao(sql2o);
         conn = sql2o.open();
     }
 
@@ -38,6 +41,21 @@ public class Sql2oCategoryDaoTest {
         categoryDao.add(testCategory);
         categoryDao.add(testCategory2);
         assertEquals(2, categoryDao.getAll().size());
+    }
+
+    @Test
+    public void getAll_returnsZeroWhenNoCategoriesExist_0() {
+        assertEquals(0, categoryDao.getAll().size());
+    }
+
+    @Test
+    public void getAllTasksById_returnsAllExistingTasks_2() {
+        Category testCategory = setupCategory();
+        categoryDao.add(testCategory);
+        int assisgnedId = testCategory.getId();
+        taskDao.add(new Task("mow the lawn", assisgnedId));
+        taskDao.add(new Task("trim the hedges", assisgnedId));
+        assertEquals(2, categoryDao.getAllTasksById(assisgnedId));
     }
 
     @Test
