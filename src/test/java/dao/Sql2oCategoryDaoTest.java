@@ -77,6 +77,18 @@ public class Sql2oCategoryDaoTest {
         assertEquals(originalName, updatedCategory.getName());
     }
 
+    @Test
+    public void deleteById_removesCorrectCategory() {
+        Category testCategory = setupCategory();
+        Category testCategory2 = new Category("Laundry");
+        categoryDao.add(testCategory);
+        categoryDao.add(testCategory2);
+        int assignedId = testCategory.getId();
+        categoryDao.deleteById(assignedId);
+        assertTrue(categoryDao.getAll().contains(testCategory2));
+        assertFalse(categoryDao.getAll().contains(testCategory));
+    }
+
     public Category setupCategory() {
         return new Category("Yardwork");
     }
