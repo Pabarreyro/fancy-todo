@@ -41,6 +41,14 @@ public class Sql2oTaskDaoTest {
         assertEquals(2, taskDao.getAll().size());
     }
 
+    @Test
+    public void findById_returnsCorrectTask() {
+        Task testTask= setupTask();
+        taskDao.add(testTask);
+        int assignedId = testTask.getId();
+        assertEquals(testTask, taskDao.findById(assignedId));
+    }
+
     public Task setupTask(){
         return new Task("mow the lawn", 1);
     }
