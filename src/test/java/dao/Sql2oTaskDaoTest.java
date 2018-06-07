@@ -49,6 +49,20 @@ public class Sql2oTaskDaoTest {
         assertEquals(testTask, taskDao.findById(assignedId));
     }
 
+    @Test
+    public void update_setsNewValuesProperly() {
+        Task testTask = setupTask();
+        String originalDescription = testTask.getDescription();
+        int originalCategoryId = testTask.getCategoryId();
+        taskDao.add(testTask);
+        int assignedId = testTask.getId();
+        taskDao.update(assignedId, "trim the hedges", 2);
+        Task updatedTask = taskDao.findById(assignedId);
+        assertNotEquals(originalDescription, updatedTask.getDescription());
+        assertNotEquals(originalCategoryId, updatedTask.getCategoryId());
+        assertEquals(assignedId, updatedTask.getId());
+    }
+
     public Task setupTask(){
         return new Task("mow the lawn", 1);
     }
