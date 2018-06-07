@@ -5,10 +5,10 @@ import models.Task;
 
 import java.util.List;
 
-public class CategoryDao {
+public interface CategoryDao {
 
     // CREATE
-    void add(String name);
+    void add(Category category);
 
     // LIST
     List<Category> getAll();
